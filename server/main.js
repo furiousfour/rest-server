@@ -1,5 +1,52 @@
 
 Router.map(function() {
+
+    this.route('assignAmbulance', {
+        path: '/api/assign-ambulance',
+        where: 'server',
+        action: function() {
+            // GET, POST, PUT, DELETE
+            var requestMethod = 'GET';
+            // Data from a POST request
+
+            var vehicle_id = this.params.query.vehicleID;
+            var des_lat = this.params.query.lat;
+            var des_long = this.params.query.long;
+            var des_name = this.params.query.name;
+
+            AssignedAmulance.insert({
+                vehicle_id : vehicle_id,
+                des_lat: des_lat,
+                des_long: des_long,
+                des_name: des_name,
+                timestamp: new Date().valueOf()
+            });
+
+            this.response.statusCode = 200;
+            this.response.end( 'success' );
+        }
+    });
+
+    this.route('unAssignAmbulance', {
+        path: '/api/un-assign-ambulance',
+        where: 'server',
+        action: function() {
+            // GET, POST, PUT, DELETE
+            var requestMethod = 'GET';
+            // Data from a POST request
+
+            var vehicle_id = this.params.query.vehicleID;
+
+            AssignedAmulance.remove({
+                vehicle_id : vehicle_id
+            });
+
+            this.response.statusCode = 200;
+            this.response.end( 'success' );
+        }
+    });
+
+
     this.route('logVehiclePosition', {
         path: '/api/vehicle/log',
         where: 'server',
