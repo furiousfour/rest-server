@@ -23,7 +23,8 @@ Router.map(function() {
                 speed: speed,
                 heading: heading,
                 accuracy: accuracy,
-                isOccupied: isOccupied
+                isOccupied: isOccupied,
+                timestamp: new Date().valueOf()
             });
 
             this.response.statusCode = 200;
