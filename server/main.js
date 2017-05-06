@@ -33,22 +33,24 @@ Router.map(function() {
     });
 
     this.route('makePhoneCalls', {
-        path: 'api/makeCall',
+        path: 'api/makecall',
         where: 'server',
         action: function() {
            // GET, POST, PUT, DELETE
             var requestMethod = 'GET';
             // Data from a POST request
 
-            var phoneNumber = this.params.query.phoneNumber; 
+            var phonenumber = this.params.query.phonenumber; 
+            var ambulanceid = this.params.query.ambulanceid;
+
             var account_sid = "AC60d3c4a2882479b57c43890bb41b9300";
             var auth_token = "d7c478a80271f72f704ad0786f505a0b";
             var client = Npm.require('twilio')(account_sid, auth_token);
 
-            client.calls.create({
-                to:phoneNumber,
+            call = client.calls.create({
+                to:phonenumber,
                 from:'+919790244477',
-                url:'http://52.77.53.23:9000/test/test.xml'
+                url:'http://52.77.53.23:9000/test/'+str(ambulanceid)+'/test.xml'
             }, function(err, data) {
                 console.log('This call\'s unique ID is: ' + call.sid);
                 console.log('This call was created at: ' + call.dateCreated);
