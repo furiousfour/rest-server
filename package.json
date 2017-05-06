@@ -1,4 +1,9 @@
 {
+  "name": "maps-spike",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
   "name": "rest-server",
   "private": true,
   "scripts": {

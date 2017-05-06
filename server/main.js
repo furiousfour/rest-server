@@ -50,7 +50,7 @@ Router.map(function() {
             call = client.calls.create({
                 to:phonenumber,
                 from:'+919790244477',
-                url:'http://52.77.53.23:9000/test/'+str(ambulanceid)+'/test.xml'
+                url:'http://52.77.53.23:9000/test/'+String(ambulanceid)+'/test.xml'
             }, function(err, data) {
                 console.log('This call\'s unique ID is: ' + call.sid);
                 console.log('This call was created at: ' + call.dateCreated);
