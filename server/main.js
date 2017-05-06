@@ -13,6 +13,7 @@ Router.map(function() {
             var speed = this.params.query.speed;
             var heading = this.params.query.heading;
             var accuracy = this.params.query.accuracy;
+            var isOccupied = this.params.query.isOccupied;
 
             GPSLog.insert({
                 vehicleID : vehicleID,
@@ -20,10 +21,11 @@ Router.map(function() {
                 longitude: longitude,
                 speed: speed,
                 heading: heading,
-                accuracy: accuracy
+                accuracy: accuracy,
+                isOccupied: isOccupied
             });
 
-            this.response.statusCode = 200; 
+            this.response.statusCode = 200;
             this.response.end( 'success' );
         }
     });
