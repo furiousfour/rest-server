@@ -27,9 +27,9 @@ Router.map(function () {
             // Data from a POST request
 
             var vehicle_id = this.params.query.vehicleID;
-            var des_lat = this.params.query.lat;
-            var des_long = this.params.query.long;
-            var des_name = this.params.query.name;
+            var des_lat = this.params.query.des_lat;
+            var des_long = this.params.query.des_long;
+            var des_name = this.params.query.des_name;
 
             AssignedAmulance.insert({
                 vehicle_id: vehicle_id,
