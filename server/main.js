@@ -119,7 +119,6 @@ Router.map(function () {
                 console.log('This call\'s unique ID is: ' + call.sid);
                 console.log('This call was created at: ' + call.dateCreated);
             });
-
             this.response.statusCode = 200;
             this.response.end('success');
         }
