@@ -6,23 +6,38 @@
 }
 
 .searchButton {
+  position: absolute;
     width: 20em;  
-    height: 3em;
+    height: 4em;
     margin-top: 2em;
     margin-left: 50em;
 }
 
 .textBox {
-	width: 20em;
-	height: 2em;
+  position: absolute;
+	width: 36em;
+	height: 4em;
 	margin-top: 2em;
-    margin-left: 50em;
+    margin-left: 4em;
+}
+.locationField{
+  position: relative;
+}
+.searchtext{
+    position: absolute;
+    top: -7px;
+    right: 0;
+    left: 0;
+}
+.locationtext{
+   margin-top: 14px;
 }
 
 .sendLocation {
+
 	float: right;
 	width: 20em;
-	height: 3em;
+	height: 5em;
 	margin-top: 2em;
-    margin-right: 50em;
+    margin-right: 20em;
 }
