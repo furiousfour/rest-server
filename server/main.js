@@ -1,10 +1,27 @@
+Meteor.methods({
 
-Router.map(function() {
+    'sendLocation' : function(location){
 
+        console.log("Request to send location for location " + location.latitude + " : " + location.longitude);
+        var url = "http://13.228.23.221:9000/assign-ambulance/";
+        url +=location.latitude+"/"+location.longitude;
+        try {
+            const result = HTTP.call('GET', url, {});
+            console.log("Result of post : " + JSON.stringify(result));
+            return true;
+        } catch (e) {
+            console.log(e);
+            console.log("Got a network error, timeout, or HTTP error in the 400 or 500 range.");
+       }
+    }
+});
+
+
+Router.map(function () {
     this.route('assignAmbulance', {
         path: '/api/assign-ambulance',
         where: 'server',
-        action: function() {
+        action: function () {
             // GET, POST, PUT, DELETE
             var requestMethod = 'GET';
             // Data from a POST request
@@ -15,7 +32,7 @@ Router.map(function() {
             var des_name = this.params.query.name;
 
             AssignedAmulance.insert({
-                vehicle_id : vehicle_id,
+                vehicle_id: vehicle_id,
                 des_lat: des_lat,
                 des_long: des_long,
                 des_name: des_name,
@@ -23,14 +40,14 @@ Router.map(function() {
             });
 
             this.response.statusCode = 200;
-            this.response.end( 'success' );
+            this.response.end('success');
         }
     });
 
     this.route('unAssignAmbulance', {
         path: '/api/un-assign-ambulance',
         where: 'server',
-        action: function() {
+        action: function () {
             // GET, POST, PUT, DELETE
             var requestMethod = 'GET';
             // Data from a POST request
@@ -38,11 +55,11 @@ Router.map(function() {
             var vehicle_id = this.params.query.vehicleID;
 
             AssignedAmulance.remove({
-                vehicle_id : vehicle_id
+                vehicle_id: vehicle_id
             });
 
             this.response.statusCode = 200;
-            this.response.end( 'success' );
+            this.response.end('success');
         }
     });
 
@@ -50,7 +67,7 @@ Router.map(function() {
     this.route('logVehiclePosition', {
         path: '/api/vehicle/log',
         where: 'server',
-        action: function() {
+        action: function () {
             // GET, POST, PUT, DELETE
             var requestMethod = 'GET';
             // Data from a POST request
@@ -64,7 +81,7 @@ Router.map(function() {
             var isOccupied = this.params.query.isOccupied;
 
             GPSLog.insert({
-                vehicleID : vehicleID,
+                vehicleID: vehicleID,
                 latitude: latitude,
                 longitude: longitude,
                 speed: speed,
@@ -75,19 +92,19 @@ Router.map(function() {
             });
 
             this.response.statusCode = 200;
-            this.response.end( 'success' );
+            this.response.end('success');
         }
     });
 
     this.route('makePhoneCalls', {
         path: 'api/makecall',
         where: 'server',
-        action: function() {
-           // GET, POST, PUT, DELETE
+        action: function () {
+            // GET, POST, PUT, DELETE
             var requestMethod = 'GET';
             // Data from a POST request
 
-            var phonenumber = this.params.query.phonenumber; 
+            var phonenumber = this.params.query.phonenumber;
             var ambulanceid = this.params.query.ambulanceid;
 
             var account_sid = "AC60d3c4a2882479b57c43890bb41b9300";
@@ -95,16 +112,16 @@ Router.map(function() {
             var client = Npm.require('twilio')(account_sid, auth_token);
 
             call = client.calls.create({
-                to:phonenumber,
-                from:'+919790244477',
-                url:'http://52.77.53.23:9000/test/'+String(ambulanceid)+'/test.xml'
-            }, function(err, data) {
+                to: phonenumber,
+                from: '+919790244477',
+                url: 'http://13.228.23.221:9000/test/' + String(ambulanceid) + '/test.xml'
+            }, function (err, data) {
                 console.log('This call\'s unique ID is: ' + call.sid);
                 console.log('This call was created at: ' + call.dateCreated);
             });
 
-            this.response.statusCode = 200; 
-            this.response.end( 'success' );
+            this.response.statusCode = 200;
+            this.response.end('success');
         }
     });
 });

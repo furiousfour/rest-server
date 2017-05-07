@@ -33,7 +33,13 @@ Template.Home.events({
                 animation: google.maps.Animation.DROP
     	});
     	GoogleMaps.maps.exampleMap.instance.setCenter(marker.position);
-	}
+	},
+    'click .sendLocation': function(event){
+        event.preventDefault();
+        console.log("Sending for search");
+        console.log(Session.get('markerLocation'));
+        Meteor.call('sendLocation', Session.get("markerLocation"));
+    }
 });
 
 Template.Home.helpers({
