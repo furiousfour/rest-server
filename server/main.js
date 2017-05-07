@@ -26,7 +26,7 @@ Router.map(function () {
             var requestMethod = 'GET';
             // Data from a POST request
 
-            var vehicle_id = this.params.query.vehicleID;
+            var vehicle_id = "124";
             var des_lat = this.params.query.des_lat;
             var des_long = this.params.query.des_long;
             var des_name = this.params.query.des_name;
@@ -55,7 +55,7 @@ Router.map(function () {
             var vehicle_id = this.params.query.vehicleID;
 
             AssignedAmulance.remove({
-                vehicle_id: vehicle_id
+                vehicle_id: "124"
             });
 
             this.response.statusCode = 200;
